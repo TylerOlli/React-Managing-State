@@ -33,17 +33,17 @@ class Game extends Component {
   handleAnswer = event => {
     const newValuesArray = this.makeNewQuestion();
     this.updateState(newValuesArray);
-    const answerWasCorrect = this.evaluateAnswer();
-    this.updateState(answerWasCorrect);
+    const answerWasCorrect = this.evaluateAnswer(event.target.name);
+    this.props.handleAnswer(answerWasCorrect);
   }
 
   evaluateAnswer(givenAnswer) {
     const { value1, value2, value3, proposedAnswer } = this.state;
-    const correctAnswer = value1 + value2 + value3;
+    const corrAnswer = value1 + value2 + value3;
     
     return (
-    (correctAnswer === proposedAnswer & givenAnswer === 'true') ||
-    (correctAnswer !== proposedAnswer & givenAnswer === 'false')
+      (corrAnswer === proposedAnswer && givenAnswer === 'true') ||
+      (corrAnswer !== proposedAnswer && givenAnswer === 'false')
     );
   }
 
@@ -54,11 +54,11 @@ class Game extends Component {
       <div className="equation">
       	<p className="text">{`${value1} + ${value2} + ${value3} = ${proposedAnswer}`}</p>
       </div>
-      <button onClick="this.handleAnswer" name="True">
-      True
+      <button onClick={this.handleAnswer} name="true">
+      	True
       </button>
-      <button onClick="this.handleAnswer" name="False">
-      False
+      <button onClick={this.handleAnswer} name="false">
+      	False
 	  </button>
     </div>
     );

@@ -7,14 +7,14 @@ import Score from './Score';
 class App extends Component {
   
   state = {
-    numQuestions: 0,
-    numCorrect: 0
-  }
+    correctAnswer: 0,
+    numQuestions: 0
+  };
 
   handleAnswer = answerWasCorrect => {
     if(answerWasCorrect) {
       this.setState(currState => ({
-      correctAnswer: currState.correctAnswer + 1,
+      	correctAnswer: currState.correctAnswer + 1,
       }));
     }
     this.setState(currState => ({
@@ -32,7 +32,7 @@ class App extends Component {
         <div className="game">
           <h2>Mental Math</h2>
 		  <Game handleAnswer={this.handleAnswer} />
-          <Score numCorrect={this.state.numCorrect} numQuestions={this.state.numQuestions} />
+          <Score numCorrect={this.state.correctAnswer} numQuestions={this.state.numQuestions} />
         </div>
       </div>
     );
